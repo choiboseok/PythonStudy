@@ -58,7 +58,7 @@ def user_lotto(*user_list) :
         return flag, text, lotto_list
     else:
         for i in lotto_list :
-            if i > 45 :
+            if not (1 <= i <= 45) : # i >= 1 or i <= 45
                 flag = False
                 text = "1~45 사이 값만 가능"
                 lotto_list = None
