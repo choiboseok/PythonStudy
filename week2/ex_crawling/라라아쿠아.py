@@ -8,23 +8,16 @@ img_path = './testimg'
 if not os.path.exists(img_path):
     os.mkdir(img_path)
 
-url = 'https://www.aquamarket.co.kr/goods/goods_list.php?cateCd=001011'
+url = 'https://raraaqua.com/category/%ED%81%AC%EA%B8%B0%EB%B3%84-%EC%88%98%EC%A1%B0/615/'
 driver = webdriver.Chrome()
 driver.implicitly_wait(3)
 driver.get(url)
 time.sleep(1)
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 driver.quit()
-div = soup.select_one('div.list')
-lis = div.find_all('li')
-for li in lis:
-    thumbnail = li.select_one('div.thumbnail')
-    a_tags = thumbnail.select_one('a')
-    img_src= a_tags.select_one('img')['src']
-    img_title= a_tags.select_one('img')['title']
-    img_file_path = os.path.join(img_path, img_src)
-    req.urlretrieve(img_src, img_file_path)
-    print(img_src, img_title)
+div = soup.select_one("div.ec-base-product")
+uls = div.select_one('ul.prdList grid5')
+print(uls)
 
 
 # ul = soup.select_one('ul.wOWfwtMC_3 _3cLKMqI7mI')
