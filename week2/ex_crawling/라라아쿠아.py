@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
+from matplotlib.image import thumbnail
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 import urllib.request as req
 import requests
 import time
@@ -16,10 +18,17 @@ time.sleep(1)
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 driver.quit()
 div = soup.select_one("div.ec-base-product")
-uls = div.select_one('ul.prdList grid5')
-print(uls)
+lis = div.find_all('li')
+img_set = set()
+for li in lis:
+    tnail = li.select_one('div.thumbnail')
+    tnail_a = tnail.select_one('img')
+    print(tnail_a)
+    # # img_set.add(img['src'])
+    # description = li.select_one('div.description')
+    # name = description.select_one('div.name')
+    # span = name.select_one('span.title displaynone')
+    # text = span['text']
+    # print(text)
 
 
-# ul = soup.select_one('ul.wOWfwtMC_3 _3cLKMqI7mI')
-# lis = ul.select_one('li')
-# for li in lis :

@@ -25,11 +25,8 @@ img_set = set()
 for li in lis:
     photo = li.select_one('.item_photo_box')
     p_a = photo.select_one('a')
-    imgs = p_a.find_elements(By.TAG_NAME, 'img')
-    for v in imgs:
-        if v.get_attribute('src') != None:
-            img_set.add(v.get_attribute('src'))
     img = p_a.select_one('img')
+    img_set.add(img['src'])
     info = li.select_one('.item_info_cont')
     i_a = info.select_one('a')
     name = i_a.select_one('strong.item_name')
