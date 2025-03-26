@@ -2,8 +2,9 @@ from os import abort
 
 from flask import Flask, request, jsonify
 import cx_Oracle
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 # oracle 연결
 conn = cx_Oracle.connect("jdbc", "jdbc", "localhost:1521/xe")
@@ -80,4 +81,4 @@ def delete_item(comm_cd):
         return jsonify({'error': str(e)}), 500
 
 if __name__ =='__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")

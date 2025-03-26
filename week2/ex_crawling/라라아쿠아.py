@@ -22,14 +22,24 @@ lis = div.find_all('li')
 img_set = set()
 for li in lis:
     tnail = li.select_one('div.thumbnail')
-    t_a = tnail.select_one('a')
-    img = t_a.select_one('img')
-    print(img['src'])
-    # # img_set.add(img['src'])
-    # description = li.select_one('div.description')
-    # name = description.select_one('div.name')
-    # span = name.select_one('span.title displaynone')
-    # text = span['text']
-    # print(text)
+    if tnail:
+        t_a = tnail.select_one('a')
+        img = t_a.select_one('img')
+        img_set.add(img['src'])
+        print(img['src'])
+        description = li.select_one('div.description')
+        name = description.select_one('div.name')
+        name_a = name.select_one('a')
+        span = name_a.find_all('span')
+        print(span[2].text)
 
-
+img_dir = os.path.join('./', '라라아쿠아사진') # 검색명으로 폴더
+if not os.path.exists(img_dir) :
+    os.mkdir(img_dir)
+for i, v in enumerate(img_set):
+    file = os.path.join(img_dir, str(i) + '.png')
+    try :
+        req.urlretrieve(v, file)
+    except Exception as e:
+        print(str(e))
+print("저장완료")
