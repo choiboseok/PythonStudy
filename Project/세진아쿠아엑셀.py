@@ -1,22 +1,29 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from openpyxl import Workbook
+from operator import itemgetter
 import urllib.request as req
+import xlwings as xw
 import requests
 import time
 import os
 
-img_path = './testimg'
+img_path = '../week2/ex_crawling/testimg'
 if not os.path.exists(img_path):
     os.mkdir(img_path)
+
+wb = Workbook()
+ws = wb.active
 
 query = '세진아쿠아리움'
 i=1
 option = webdriver.ChromeOptions()
 option.add_argument('--headless')
 img_set = set()
+text_set = set()
 while True:
-    url = url = f'https://seijin.co.kr/goods/goods_list.php?page={i}&cateCd=099'
+    url = url = f'https://seijin.co.kr/goods/goods_list.php?page={i}&cateCd=002'
     driver = webdriver.Chrome(options=option)
     driver.implicitly_wait(3)
     driver.get(url)
@@ -37,6 +44,7 @@ while True:
         info = li.select_one('.item_info_cont')
         i_a = info.select_one('a')
         name = i_a.select_one('strong.item_name')
+        text_set.add(name.text)
         print(img['src'])
         print(name.text)
         print("-"*100)
@@ -44,14 +52,27 @@ while True:
     # page 값 증가
     i += 1
 
-# 이미지 저장
-img_dir = os.path.join('./', '세진아쿠아수초') # 검색명으로 폴더
-if not os.path.exists(img_dir) :
-    os.mkdir(img_dir)
-for i, v in enumerate(img_set):
-    file = os.path.join(img_dir, str(i) + '.png')
-    try :
-        req.urlretrieve(v, file)
-    except Exception as e:
-        print(str(e))
-print("저장완료")
+ws.title = "세진 아쿠아"
+
+column = ['title']
+ws.append(column)
+n=2
+for t in text_set :
+    ws[f'A{n}'] = t
+    n+=1
+
+column = ['img']
+ws.append(column)
+n=2
+for i in img_set :
+    ws[f'B{n}'] = i
+    n+=1
+
+# row = ['']
+# ws.append(row)
+# row = sorted(row, key=itemgetter(0))
+# for data in row:
+#     pass
+
+wb.save("프로젝트 테스트.xlsx")
+wb.close()

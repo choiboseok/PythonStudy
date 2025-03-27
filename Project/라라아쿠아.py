@@ -6,7 +6,7 @@ import urllib.request as req
 import requests
 import time
 import os
-img_path = './testimg'
+img_path = '../week2/ex_crawling/testimg'
 if not os.path.exists(img_path):
     os.mkdir(img_path)
 
@@ -33,7 +33,7 @@ for li in lis:
         span = name_a.find_all('span')
         print(span[2].text)
 
-img_dir = os.path.join('./', '라라아쿠아사진') # 검색명으로 폴더
+img_dir = os.path.join('../week2/ex_crawling/', '라라아쿠아사진') # 검색명으로 폴더
 if not os.path.exists(img_dir) :
     os.mkdir(img_dir)
 for i, v in enumerate(img_set):

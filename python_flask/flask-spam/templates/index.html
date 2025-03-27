@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>스팸 분류기</title>
+</head>
+<body>
+    <h1>📬스팸 메세지 분류기</h1>
+    <form method="post">
+        <textarea name="message" cols="30" rows="5" placeholder="메세지를..."></textarea>
+        <button type="submit"> 판별하기 </button>
+    </form>
+    {% if prediction %}
+        <h2>결과 : {{ prediction }}</h2>
+    {% endif%}
+</body>
+</html>
