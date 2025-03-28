@@ -48,26 +48,25 @@ class DBManager:
 if __name__ == '__main__':
     sql = """
             INSERT
-            INTO fish_tank(title, img)
-            VALUES(:1, :2)
+            INTO fish_tank(title, img, price)
+            VALUES(:1, :2, :3)
         """
     # '.xlsx' 엑셀 파일 불러오기
-    wb = load_workbook(filename='프로젝트_테스트.xlsx')
-    ws = wb['세진 아쿠아']
-    n = 2
+    wb = load_workbook(filename='어항데이터.xlsx')
+    ws = wb['어항']
+    n = 1
 
     db = DBManager()
     conn = db.get_connection()
     while True:
         if ws[f'A{n}'].value == None:
             break
-        n+=1
         if conn:
-            print(ws[f'A{n}'].value, ws[f'B{n}'].value)
-            db.insert(sql, [ws[f'A{n}'].value, ws[f'B{n}'].value])
+            db.insert(sql, [ws[f'A{n}'].value, ws[f'B{n}'].value, ws[f'C{n}'].value])
+        n+=1
 
-    # 첫 번째 시트 불러오기
-    # ws = wb.active
+            # 첫 번째 시트 불러오기
+            # ws = wb.active
 
 
 
