@@ -66,6 +66,7 @@ for t, i, p in zip(text_list, img_list, price_list) :
     ws[f'A{n}'] = t
     ws[f'B{n}'] = i
     ws[f'C{n}'] = p
+    ws[f'D{n}'] = '어항'
     n+=1
 
 #

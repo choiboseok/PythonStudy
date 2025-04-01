@@ -24,7 +24,7 @@ img_list = []
 text_list = []
 price_list = []
 while True:
-    url = url = f'https://seijin.co.kr/goods/goods_list.php?page={i}&cateCd=010'
+    url = url = f'https://seijin.co.kr/goods/goods_list.php?page={i}&cateCd=010017'
     driver = webdriver.Chrome(options=option)
     driver.implicitly_wait(3)
     driver.get(url)
@@ -66,6 +66,7 @@ for t, i, p in zip(text_list, img_list, price_list) :
     ws[f'A{n}'] = t
     ws[f'B{n}'] = i
     ws[f'C{n}'] = p
+    ws[f'D{n}'] = '히터기'
     n+=1
 
 #
@@ -90,5 +91,5 @@ for t, i, p in zip(text_list, img_list, price_list) :
 # for data in row:
 #     pass
 
-wb.save("어항데이터.xlsx")
+wb.save("히터기데이터.xlsx")
 wb.close()

@@ -48,12 +48,12 @@ class DBManager:
 if __name__ == '__main__':
     sql = """
             INSERT
-            INTO fish_tank(title, img, price)
+            INTO heater(title, img, price)
             VALUES(:1, :2, :3)
         """
     # '.xlsx' 엑셀 파일 불러오기
-    wb = load_workbook(filename='어항데이터.xlsx')
-    ws = wb['어항']
+    wb = load_workbook(filename='히터기데이터.xlsx')
+    ws = wb['히터']
     n = 1
 
     db = DBManager()
@@ -64,9 +64,5 @@ if __name__ == '__main__':
         if conn:
             db.insert(sql, [ws[f'A{n}'].value, ws[f'B{n}'].value, ws[f'C{n}'].value])
         n+=1
-
             # 첫 번째 시트 불러오기
             # ws = wb.active
-
-
-
