@@ -48,12 +48,12 @@ class DBManager:
 if __name__ == '__main__':
     sql = """
             INSERT
-            INTO heater(title, img, price)
+            INTO food(title, img, price)
             VALUES(:1, :2, :3)
         """
     # '.xlsx' 엑셀 파일 불러오기
-    wb = load_workbook(filename='히터기데이터.xlsx')
-    ws = wb['히터']
+    wb = load_workbook(filename='사료데이터.xlsx')
+    ws = wb['사료']
     n = 1
 
     db = DBManager()

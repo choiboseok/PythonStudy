@@ -16,7 +16,6 @@ if not os.path.exists(img_path):
 wb = Workbook()
 ws = wb.active
 
-query = '세진아쿠아리움'
 i=1
 option = webdriver.ChromeOptions()
 option.add_argument('--headless')
