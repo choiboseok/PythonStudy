@@ -6,10 +6,11 @@ import os
 
 wb = Workbook()
 ws = wb.active
+
 option = webdriver.ChromeOptions()
 option.add_argument('--headless')
 
-url = 'https://raraaqua.com/category/60cm-90cm%EB%AF%B8%EB%A7%8C/622/'
+url = 'https://raraaqua.com/category/%EA%B1%B8%EC%9D%B4%EC%8B%9D%EC%97%AC%EA%B3%BC%EA%B8%B0/660/'
 driver = webdriver.Chrome(options=option)
 driver.implicitly_wait(3)
 driver.get(url)
@@ -34,7 +35,7 @@ for li in lis:
         # 이미지, 제목 가져오기
         src = img.get('src')
         alt = img.get('alt')
-        img_list.append("https:" + src)
+        img_list.append(src)
         text_list.append(alt)
         print("https:"+src)
         print(alt)
@@ -47,6 +48,7 @@ for li in lis:
         price_list.append(price)
         print(spans[1].text)
 
+
 n=1
 for t, h, i, p in zip(text_list, href_list, img_list, price_list) :
     ws[f'A{n}'] = t
@@ -55,5 +57,5 @@ for t, h, i, p in zip(text_list, href_list, img_list, price_list) :
     ws[f'D{n}'] = p
     n+=1
 
-wb.save("/엑셀/라라/어항데이터(라라아쿠아)_60.xlsx")
+wb.save("/엑셀/라라/여과기데이터(라라아쿠아)_걸이식.xlsx")
 wb.close()
